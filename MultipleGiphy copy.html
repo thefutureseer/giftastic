@@ -1,88 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <title>Quote the Giphy</title>
+  <meta charset="UTF-8">
+  <title>Animaltastic</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
-
-  <!-- button bodies -->
-  <div id="buttons">
-    <button data-person="arnold schwarzenegger">I'll be back</button>
-    <button data-person="Jurrasic World">Dinosaur Park</button>
-    <button data-person="Fat Albert">Hey hey hey!</button>
-    <button data-person="Chocolate">Chocolate anyone?</button>
-    <button data-person="Matrix">Code this!</button>
-
+  <div id="animal-buttons">
   </div>
-
-  <!-- space for gifs to go -->
-  <div id="gifs-appear-here">
+  <form id="animal-form">
+    <label for="animal-input">Add an animal</label>
+    <input type="text" id="animal-input"><br>
+    <input id="add-animal" type="submit" value="Submit">
+  </form>
+  <div id="animals">
   </div>
-
-  <!-- JavaScript -->
-
-   <!-- asking for the jquery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
- <!-- JavaScript type of script here -->
-  <script type="text/javascript">
-
-
-  /* Click a button to make a gif appear from an api ligrary.   */
-    $("button").on("click", function() {
-
-      /* variable holding the topics to ask the API for*/
-      var person = $(this).attr("data-person");
-
-      /* variable holding the api where we get the gif plus "person" variable and key to allow access */
-      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        person + "&api_key=dc6zaTOxFJmzC&limit=10";
-
-        /* calling the url of the gif, getting the gif  */
-      $.ajax({
-          url: queryURL,
-          method: "GET"
-        })
-        /* When done store response in results container */
-      .done(function(response) {
-
-        /* result container holding data of each gif */
-          var results = response.data;
-          console.log(response.data);
-
-          /* looping through the results container of each "response" of each gif */
-          for (var i = 0; i < results.length; i++) {
-
-            /* conecting to the container grabbing the class item inside the div.  */
-            var gifDiv = $("<div class='item'>");
-
-  /* container=data from looping through the response of the ajax function & adding the gif rating */
-            var rating = results[i].rating;
-
-  /* container/data from grabbing the Place to write text and put the rating of the gif  */
-            var p = $("<p>").text("Rating: " + rating);
-
-  /* container with the gif image */
-            var personImage = $("<img>");
-
-  /* gif image get the pic & size of the results variable for the first gif in the set. */
-            personImage.attr("src", results[i].images.fixed_height.url);
-
-
-           gifDiv.prepend(p);
-
-            /* puts each picture in section(div) of 10 gifs at the beginning  */
-            gifDiv.prepend(personImage);
-
-            /* grabs the place(div) for gifs to go then adds the item in the top or beginning each time. */
-           $("#gifs-appear-here").prepend(gifDiv);
-          }
-        });
-    });
-  </script>
+  <script src="hw.js"></script>
 </body>
-
 </html>
